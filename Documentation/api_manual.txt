@@ -1,0 +1,5 @@
+
+
+
+Python API Documentation:
+https://sec-api.io/docs/sec-filings-item-extraction-api/python-example
