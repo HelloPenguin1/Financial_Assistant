@@ -17,3 +17,4 @@ ragas
 langgraph-cli[inmem]
 fastapi
 uvicorn
+edgartools
