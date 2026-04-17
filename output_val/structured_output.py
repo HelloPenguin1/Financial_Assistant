@@ -9,4 +9,3 @@ class queryDecompose(BaseModel):
     intent: Literal["full_report", "specific", "comparison"]
     rationale: str
     
-    

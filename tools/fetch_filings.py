@@ -6,10 +6,10 @@ class fetchData:
         set_identity("dev@gmail.com")
         self.filings = ""
         self.company = ""
-
     
     
     def fetch_filings(self, ticker:str,form_type:list[str],start_date:str, end_date:str=None):
+        """This function fetches SEC filings and return filing objects"""
         self.company = Company(ticker)
         start = f"{start_date}-01-01"
         end = f"{end_date}-01-01" if end_date is not None else ""
