@@ -27,6 +27,8 @@ if __name__ == "__main__":
             print(result["company"])
             print(result["filing_to_fetch"])
             print(result["rationale"])
+            print(result["start_date"])
+            print(result["end_date"])
             
     except KeyboardInterrupt:
         print("\nExiting...")

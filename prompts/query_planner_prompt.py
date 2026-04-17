@@ -9,6 +9,7 @@ query_planner_prompt = ChatPromptTemplate.from_template(
 
     1) The company name associated/asked upon in the query.
     2) The intent behind the query. Examine what information the user needs. 
+    3) The start and end year specified by the user. Leave end_year empty if not specified in query.
     3) The relevant SEC filing type(s) required.
     4) The rationale behind why you chose the relevant SEC filing to fetch in brief. 
     
@@ -28,6 +29,18 @@ query_planner_prompt = ChatPromptTemplate.from_template(
         Earnings announcements
         M&A, leadership changes, legal issues
         Anything sudden or time-sensitive
+    
+    Refer to the example below
+        
+    <example>
+    User Query: Examine AAPL's risk factors and how it changed from 2024 to 2026.
+    Your Output:
+    company: APPL
+    filing_to_fetch: 10-K
+    start_date: 2024
+    end_date: 2026
+    rationale: Retrieve a 10-K because it contains the most comprehensive, audited, and annually consolidated disclosure of a company’s risk factors.
+    </example>
     
     User Question : {question}
     

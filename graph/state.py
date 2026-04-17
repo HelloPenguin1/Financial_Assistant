@@ -7,6 +7,8 @@ class GraphState(TypedDict):
     #Query Decomposer Stage
     company: str
     filing_to_fetch: str
+    start_date: str
+    end_date: str
     rationale: str
     
     

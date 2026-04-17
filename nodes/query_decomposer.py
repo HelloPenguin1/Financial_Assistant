@@ -1,4 +1,4 @@
-from prompts.template import query_planner_prompt
+from prompts.query_planner_prompt import query_planner_prompt
 from config.model_gateway import query_llm
 
 def QueryDecomposer(state):
@@ -8,5 +8,7 @@ def QueryDecomposer(state):
     return {
         "company":output.company,
         "filing_to_fetch":output.filing_to_fetch,
+        "start_date": output.start_date,
+        "end_date":output.end_date,
         "rationale": output.rationale
     }
