@@ -1,0 +1,9 @@
+
+Note:
+
+- after query decompose, we need a lookup of the company's ticker before we fetch filings
+- we need an llm to decide which filings to fetch (10K, 10Q, 8k) depending on query, maybe we need to fetch multiple
+
+- after fetching filings, we need to store them somewhere, possibly in state. and then in vectorDB
+
+- for the company matcher, use this : if company in (dflower.["company])==conpany) retrive the ticker

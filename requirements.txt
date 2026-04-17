@@ -18,3 +18,4 @@ langgraph-cli[inmem]
 fastapi
 uvicorn
 edgartools
+langchain_groq
