@@ -9,3 +9,53 @@ Youtube
 
 https://youtu.be/mI6KDerAGOA?si=L14D4lHQ4wiHiuh3
 
+Anatomy of Key Filings
+========================================================================
+10-K Annual Report
+The 10-K is the most comprehensive filing and typically contains:
+
+    ##Business Overview (Part I, Item 1):
+    Company operations, products/services, markets
+    Revenue breakdown by segment
+    Competitive landscape
+
+    ##Risk Factors (Part I, Item 1A):
+    - Detailed disclosure of business risks
+    - Industry, operational, and financial risks
+
+    ##Management's Discussion & Analysis (Part II, Item 7)
+
+    - Analysis of financial condition and results
+    - Liquidity and capital resources
+    - Critical accounting policies
+
+    ##Financial Statements (Part II, Item 8)
+
+    - Balance sheet
+    - Income statement
+    - Cash flow statement
+    - Statement of shareholders' equity
+    - Notes to financial statements
+
+    ##Controls and Procedures (Part II, Item 9)
+    - Disclosure controls
+    - Internal control over financial reporting
+-----------------------------------------------------------------------
+
+10-Q Quarterly Report
+The 10-Q is a condensed version of the 10-K filed quarterly, containing:
+
+    Unaudited financial statements
+    Management's discussion of results
+    Updates on risk factors
+    Disclosure of material events
+
+-----------------------------------------------------------------------
+8-K Current Report
+The 8-K reports significant events that occur between 10-K and 10-Q filings:
+
+    Item 1.01: Entry into a Material Agreement
+    Item 2.01: Completion of Acquisition or Disposition
+    Item 5.02: Departure/Election of Directors or Officers
+    Item 7.01: Regulation FD Disclosure
+    Item 8.01: Other Events

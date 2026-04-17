@@ -24,6 +24,11 @@ if __name__ == "__main__":
             question = input("Question: ")
 
             result = workflow.invoke({"query": question})
+            
+            
+            
+            
+            
             print(result["company"])
             print(result["filing_to_fetch"])
             print(result["rationale"])
