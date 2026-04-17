@@ -7,8 +7,8 @@ def QueryDecomposer(state):
     output = chain.invoke({"question": state["query"]})
     return {
         "company":output.company,
-        "filing_to_fetch":output.filing_to_fetch,
         "start_date": output.start_date,
         "end_date":output.end_date,
+        "intent": output.intent,
         "rationale": output.rationale
     }

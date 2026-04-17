@@ -2,19 +2,24 @@ from langchain_core.prompts import ChatPromptTemplate, PromptTemplate
 
 
 query_planner_prompt = ChatPromptTemplate.from_template(
-    """
-    You are a financial query decomposer for a financial assistant system. 
-    
-    You are a financial query decomposition agent. Your task is to analyze a user query and determine:
+    """    
+    You are a financial query decomposition agent. Your CORE task is to analyze a user query and determine:
 
     1) The company name associated/asked upon in the query.
-    2) The intent behind the query. Examine what information the user needs. 
-    3) The start and end year specified by the user. Leave end_year empty if not specified in query.
-    3) The relevant SEC filing type(s) required.
-    4) The rationale behind why you chose the relevant SEC filing to fetch in brief. 
+    2) The intent behind the query. Examine what information the user needs. Choose between:
     
-    For deciding the SEC filing types(s), use the following guide:
-    Choose:
+        A) 'full_report': Choose this if the user query just provides company, dates, and asks for a full financial report. 
+        Choose this also if the query is vague and does not ask about a specific filing section.
+        B) 'specific': Choose this if the user query provides company, dates, and is targeted enough 
+        such that it needs fetching of a specific SEC filing type(s) to answer the given question
+        C) 'comparison': Choose this if the user provides multiple companies and asks for financial comparison between the two.
+    3) Provide a brief 1 lie rational behind the intent you chose for transparency.
+        
+    3) The start and end year specified by the user. Leave end_date empty if not specified in query.
+
+    
+    The following SEC filing types are useful if the user intent is 'specific'. You may use the guide to analyze the user question and 
+    determine whether it is 'specific' .
     A) 10-K (Annual Report) if intent is about: 
         Long-term financials
         Business overview, risk factors, strategy
@@ -30,16 +35,39 @@ query_planner_prompt = ChatPromptTemplate.from_template(
         M&A, leadership changes, legal issues
         Anything sudden or time-sensitive
     
-    Refer to the example below
+    Refer to the examples below:
         
     <example>
-    User Query: Examine AAPL's risk factors and how it changed from 2024 to 2026.
+    User Query: Analyze Apple’s financial performance from 2022 to 2025.
     Your Output:
-    company: APPL
-    filing_to_fetch: 10-K
-    start_date: 2024
-    end_date: 2026
-    rationale: Retrieve a 10-K because it contains the most comprehensive, audited, and annually consolidated disclosure of a company’s risk factors.
+    company: AAPL
+    intent: full_report
+    filing_to_fetch: [10-K, 10-Q]
+    start_date: 2022
+    end_date: 2025
+    rationale: The query is broad and non-specific, requiring a comprehensive financial overview across multiple years.
+    </example>
+
+    <example>
+    User Query: How has Tesla’s revenue changed quarter-over-quarter in 2025?
+    Your Output:
+    company: TSLA
+    intent: specific
+    filing_to_fetch: [10-Q]
+    start_date: 2025
+    end_date: 2025
+    rationale: Quarter-over-quarter analysis requires interim financial data reported in 10-Q filings.
+    </example>
+
+    <example>
+    User Query: Compare Apple and Microsoft’s financial performance between 2023 and 2025.
+    Your Output:
+    company: [AAPL, MSFT]
+    intent: comparison
+    filing_to_fetch: [10-K, 10-Q]
+    start_date: 2023
+    end_date: 2025
+    rationale: Comparative financial analysis across companies requires standardized annual and quarterly reports.
     </example>
     
     User Question : {question}
