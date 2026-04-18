@@ -22,4 +22,8 @@ planner_llm = ChatGroq(groq_api_key=groq_api_key,
                        model_name='llama-3.1-8b-instant',
                        temperature=0.1).with_structured_output(Sections)
 
+writer_llm = ChatGroq(groq_api_key=groq_api_key,
+                      model_name="openai/gpt-oss-20b",
+                      temperature=0)
+
 

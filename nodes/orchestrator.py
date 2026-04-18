@@ -1,9 +1,10 @@
-from config.model_gateway import planner_llm
+from config.model_gateway import planner_llm, writer_llm
 from langchain_core.messages import SystemMessage, HumanMessage
 from output_val.structured_output import Work
-from graph.state import WorkerState
+from graph.state import WorkerState, GraphState
+from langgraph.types import Send    
 
-def orchestrator(state):
+def orchestrator(state: GraphState):
     """Orchestrator that generates a plan for the report"""
     report_section = planner_llm.invoke(
         [
@@ -46,11 +47,59 @@ def llm_call(state: WorkerState, vectorstore):
     retriever = vectorstore.as_retriever(
         search_kwargs={
             "k":5,
-            #"filter": section['filters'] ##look into it later. maybe modify output_val for planner to output sectiosn
+            "filter": {
+                "form": section["filing_type"]
+            }
         }
     )
-    docs = retriever.invoke(section[""])
+    docs = retriever.invoke(section["retrieval_query"])
+    context = "\n\n".join([d.page_content for d in docs])
     
+    response = writer_llm.invoke(
+        [
+            SystemMessage(content="""
+        You are a financial analyst.
+
+        Write a precise analytical section using retrieved SEC filing data.
+
+        Focus:
+        - Extract signals, not generic summaries
+        - Highlight changes, trends, anomalies
+        - Be specific and data-driven
+        - No introduction or conclusion
+        - Output markdown"""),
+            
+            HumanMessage(content=f"""
+                         Section: {section["name"]} \n\n
+                         Objective: {section["generation_goal"]} \n\n
+                         Context: 
+                         {context}
+                         """)
+        ]
+        
+    )
+    # Write the updated section to completed sections
+    return {"completed_sections": [response.content]}  #save to state
+    
+    
+def synthesizer(state: GraphState):
+    completed_sections = state["completed_sections"]
+
+    return {
+        "final_report": "\n\n---\n\n".join(completed_sections)
+    }
+    
+def assign_workers(state: GraphState):
+    return [
+        Send(
+            "llm_call",
+            {
+                "section": s,
+                "vectorstore": state["vectorstore"]
+            }
+        )
+        for s in state["sections"]
+    ]
     
     
     

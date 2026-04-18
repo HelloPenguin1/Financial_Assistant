@@ -2,7 +2,7 @@ from tools.fetch_filings import fetchData
 from tools.ingestion import filings_to_langchain_docs
 from tools.vectorstore import vectordb_store
 
-class Report_Agent:
+class Construct_DB:
     def __init__(self):
         #Intialize the fetcher
         self.fetcher = fetchData()
@@ -21,8 +21,8 @@ class Report_Agent:
         chunks = filings_to_langchain_docs(filings, state["company"])
         vectordb = vectordb_store(chunks)
         
-        
-        
         return vectordb
 
+    
+        
 
