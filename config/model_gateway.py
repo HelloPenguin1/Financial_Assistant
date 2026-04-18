@@ -9,6 +9,10 @@ load_dotenv()
 #Api KEYS
 groq_api_key = os.getenv("GROQ_API_KEY")
 
+#Hugging Face 
+embedding_function = HuggingFaceEmbeddings(
+    model_name="FinanceMTEB/FinE5"
+)
 
 query_llm = ChatGroq(groq_api_key=groq_api_key,
                      model_name="llama-3.1-8b-instant",
