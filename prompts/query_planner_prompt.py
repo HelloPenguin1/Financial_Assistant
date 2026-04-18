@@ -42,7 +42,6 @@ query_planner_prompt = ChatPromptTemplate.from_template(
     Your Output:
     company: AAPL
     intent: full_report
-    filing_to_fetch: [10-K, 10-Q]
     start_date: 2022
     end_date: 2025
     rationale: The query is broad and non-specific, requiring a comprehensive financial overview across multiple years.
@@ -53,7 +52,6 @@ query_planner_prompt = ChatPromptTemplate.from_template(
     Your Output:
     company: TSLA
     intent: specific
-    filing_to_fetch: [10-Q]
     start_date: 2025
     end_date: 2025
     rationale: Quarter-over-quarter analysis requires interim financial data reported in 10-Q filings.
@@ -64,7 +62,6 @@ query_planner_prompt = ChatPromptTemplate.from_template(
     Your Output:
     company: [AAPL, MSFT]
     intent: comparison
-    filing_to_fetch: [10-K, 10-Q]
     start_date: 2023
     end_date: 2025
     rationale: Comparative financial analysis across companies requires standardized annual and quarterly reports.

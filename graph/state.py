@@ -11,7 +11,7 @@ class GraphState(TypedDict):
     #Query Decomposer Stage
     company: str
     start_date: str
-    end_date: str
+    end_date: Optional[str] = None
     intent: str
     
     vectorstore: VectorStore
@@ -27,6 +27,7 @@ class GraphState(TypedDict):
 # For Data Isolation, and parallelization
 class WorkerState(TypedDict):
     section: Section
+    vectorstore: VectorStore
     completed_sections: Annotated[
         list, operator.add
     ]

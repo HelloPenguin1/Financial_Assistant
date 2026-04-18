@@ -1,6 +1,5 @@
 from config.model_gateway import planner_llm, writer_llm
 from langchain_core.messages import SystemMessage, HumanMessage
-from output_val.structured_output import Work
 from graph.state import WorkerState, GraphState
 from langgraph.types import Send    
 
@@ -53,9 +52,10 @@ def assign_workers(state: GraphState):
     
 
 
-def llm_call(state: WorkerState, vectorstore):
+def llm_call(state: WorkerState):
     """Worker writes a section of the report"""
     section = state['section']
+    vectorstore = state["vectorstore"]
     
     retriever = vectorstore.as_retriever(
         search_kwargs={
