@@ -2,6 +2,7 @@ from typing_extensions import TypedDict
 from typing import Optional, Literal, List, Any, Annotated
 from langgraph.types import Send
 from output_val.structured_output import Section
+from langchain_core.vectorstores import VectorStore
 import operator
 
 class GraphState(TypedDict):
@@ -12,6 +13,8 @@ class GraphState(TypedDict):
     start_date: str
     end_date: str
     intent: str
+    
+    #vectorstore: VectorStore
     
     #Full Report Workflow
     sections: list[Section] # list of report sections (after orchestrator)

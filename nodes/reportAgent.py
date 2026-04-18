@@ -21,10 +21,8 @@ class Report_Agent:
         chunks = filings_to_langchain_docs(filings, state["company"])
         vectordb = vectordb_store(chunks)
         
-    
         
-    
-    
+        
         return vectordb
 
 

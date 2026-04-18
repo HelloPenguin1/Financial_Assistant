@@ -1,16 +1,21 @@
 from langgraph.graph import StateGraph, START, END
 from .state import GraphState
 from nodes.query_decomposer import QueryDecomposer
+from nodes.reportAgent import Report_Agent
 
 # Initialize the graph
 graph = StateGraph(GraphState)
 
 # Add nodes
 graph.add_node("query_decomposer",QueryDecomposer)
+graph.add_node("reportAgent", )
 
 #Add edges
 graph.add_edge(START, "query_decomposer")
-graph.add_edge("query_decomposer", END)
+graph.add_edge("query_decomposer", END) #returns parsed company, dates, intent
+graph.add_conditional_edges(
+    
+)
 
 
 # Compile

@@ -16,6 +16,9 @@ class queryDecompose(BaseModel):
 class Section(BaseModel):
     name: str = Field(description="Name of this section of the report")
     description: str = Field(description="Brief overview of the main financial indicators and concepts to be covered in this section")
+    filing_type: Literal["10-K, 10-Q, 8-K"] = Field(description="Each section focuses on one of 3 SEC filing types")
+    retrieval_query: str = Field(description="Retrieval query optimized for semantic search to retrieve important financial indicators for the particular secion")
+    
     
 
 class Sections(BaseModel):

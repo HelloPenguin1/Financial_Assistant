@@ -1,6 +1,7 @@
 from config.model_gateway import planner_llm
 from langchain_core.messages import SystemMessage, HumanMessage
-
+from output_val.structured_output import Work
+from graph.state import WorkerState
 
 def orchestrator(state):
     """Orchestrator that generates a plan for the report"""
@@ -38,4 +39,18 @@ def orchestrator(state):
 
 
 
+def llm_call(state: WorkerState, vectorstore):
+    """Worker writes a section of the report"""
+    section = state['section']
+    
+    retriever = vectorstore.as_retriever(
+        search_kwargs={
+            "k":5,
+            #"filter": section['filters'] ##look into it later. maybe modify output_val for planner to output sectiosn
+        }
+    )
+    docs = retriever.invoke(section[""])
+    
+    
+    
     
