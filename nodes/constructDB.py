@@ -18,11 +18,16 @@ class Construct_DB:
             start_date=state["start_date"],
             end_date=state["end_date"]
         )
-        chunks = filings_to_langchain_docs(filings, state["company"])
+        chunks = filings_to_langchain_docs(filings=filings, ticker=state["company"])
         vectordb = vectordb_store(chunks)
         
         return {"vectorstore": vectordb}
 
+TO IMPROVE
+- for full report take ONLY latest
+- for speicif, u can take date
+- update prompt as necessary
+- optimize vector db
     
         
 

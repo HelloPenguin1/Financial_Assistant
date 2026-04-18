@@ -28,7 +28,7 @@ graph.add_node("synthesizer", synthesizer)
 
 #Add edges
 graph.add_edge(START, "query_decomposer")
-graph.add_conditional_edges("query_decomposer", route_decision)
+graph.add_conditional_edges("query_decomposer", route_decision, ["constructdb"])
 graph.add_edge("constructdb", "orchestrator")
 graph.add_conditional_edges(
     "orchestrator",

@@ -10,9 +10,14 @@ load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
 
 #Hugging Face 
-embedding_function = HuggingFaceEmbeddings(
-    model_name="FinanceMTEB/FinE5"
-)
+# embedding_function = HuggingFaceEmbeddings(
+#     model_name="sentence-transformers/all-MiniLM-L6-v2",
+#     model_kwargs={"device": "cpu"},
+#     encode_kwargs={"normalize_embeddings": True},
+# )
+
+from langchain_openai import OpenAIEmbeddings
+embedding_function = OpenAIEmbeddings()
 
 query_llm = ChatGroq(groq_api_key=groq_api_key,
                      model_name="llama-3.1-8b-instant",

@@ -2,7 +2,7 @@ from langchain_classic.schema import Document
 from config.model_gateway import embedding_function
 
         
-def filings_to_langchain_docs(self, filings, ticker):
+def filings_to_langchain_docs(filings, ticker):
     """Take chunks from filings, convert into Lanchain documents with metadata"""
     chunks=[]
     for filing in filings:
