@@ -39,6 +39,19 @@ def orchestrator(state: GraphState):
     return {"sections": report_section.sections}
 
 
+def assign_workers(state: GraphState):
+    return [
+        Send(
+            "llm_call",
+            {
+                "section": s,
+                 "vectorstore": state["vectorstore"]
+            }
+        )
+        for s in state["sections"]
+    ]
+    
+
 
 def llm_call(state: WorkerState, vectorstore):
     """Worker writes a section of the report"""
@@ -89,17 +102,6 @@ def synthesizer(state: GraphState):
         "final_report": "\n\n---\n\n".join(completed_sections)
     }
     
-def assign_workers(state: GraphState):
-    return [
-        Send(
-            "llm_call",
-            {
-                "section": s,
-                "vectorstore": state["vectorstore"]
-            }
-        )
-        for s in state["sections"]
-    ]
-    
+
     
     

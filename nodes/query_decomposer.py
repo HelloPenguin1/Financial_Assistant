@@ -16,7 +16,7 @@ def QueryDecomposer(state):
 def route_decision(state):
     """Return the workflow to visit next"""
     if state["intent"] == 'full_report':
-        return "Report_Agent"
+        return "constructdb"
     elif state["intent"] == 'specific':
         return "Analysis_Agent"
     else:

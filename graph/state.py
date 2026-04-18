@@ -14,7 +14,7 @@ class GraphState(TypedDict):
     end_date: str
     intent: str
     
-    #vectorstore: VectorStore
+    vectorstore: VectorStore
     
     #Full Report Workflow
     sections: list[Section] # list of report sections (after orchestrator)
