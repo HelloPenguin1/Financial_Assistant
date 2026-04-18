@@ -23,17 +23,19 @@ def orchestrator(state):
         - filters (must include form)
         - generation_goal
 
-        Return STRICT JSON:
-        {
-        "sections": [...]
-        }
-
         Constraints:
         - Exactly 3 sections
         - No overlap between sections
         - Queries must target financial signals"""),
-        HumanMessage(content=f"User Query: {state['query']}, ")
-            
+        HumanMessage(content=f"""Use these information for report. 
+                     User Query: {state['query']}, 
+                     Company: {state['company']}, 
+                     Time Duration: {state['start_date']} to {state['end_date']}""")
         ]
     )
+    
+    return {"sections": report_section.sections}
+
+
+
     

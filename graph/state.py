@@ -14,7 +14,7 @@ class GraphState(TypedDict):
     intent: str
     
     #Full Report Workflow
-    sections: list[Section] # list of report sections
+    sections: list[Section] # list of report sections (after orchestrator)
     completed_sections: Annotated[
         list, operator.add   #all workers write to this key in parallel
     ]
