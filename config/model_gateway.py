@@ -1,7 +1,7 @@
 # Stores Model Gateways
 from langchain_groq import ChatGroq
 from langchain_huggingface import HuggingFaceEmbeddings
-from output_val.structured_output import queryDecompose, Sections
+from output_val.structured_output import queryDecompose, Section, Sections
 from dotenv import load_dotenv
 import os
 load_dotenv()

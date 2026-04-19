@@ -35,7 +35,7 @@ def orchestrator(state: GraphState):
         ]
     )
     
-    return {"sections": [s.model_dump() for s in report_section.sections]}
+    return {"sections": report_section.sections}
 
 
 def assign_workers(state: GraphState):
@@ -59,7 +59,7 @@ def llm_call(state: WorkerState):
     
     retriever = vectorstore.as_retriever(
         search_kwargs={
-            "k":5,
+            "k": 2,  # Reduced from 5 to 2 to avoid token limits
             "filter": {
                 "form": section.filing_type
             }
