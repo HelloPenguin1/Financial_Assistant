@@ -3,6 +3,7 @@ from langchain_core.messages import SystemMessage, HumanMessage
 from graph.state import WorkerState, GraphState
 from langgraph.types import Send
 from prompts.orchestrator_prompt import orchestrator_system_prompt
+from prompts.worker_prompt import worker_system_prompt
 
 def orchestrator(state: GraphState):
     """Orchestrator that generates a plan for the report with 10-K and 10-Q sections.
@@ -59,23 +60,16 @@ def llm_call(state: WorkerState):
     
     response = writer_llm.invoke(
         [
-            SystemMessage(content="""
-        You are a financial analyst.
-
-        Write a precise analytical section of the company's financial situation using retrieved SEC filing data.
-
-        Focus:
-        - Extract signals, not generic summaries
-        - Highlight changes, trends, anomalies
-        - Be specific and data-driven
-        - No introduction or conclusion
-        - Output markdown"""),
+            SystemMessage(content=worker_system_prompt),
             
             HumanMessage(content=f"""
                          Section: {section.name} \n\n
                          Objective: {section.generation_goal} \n\n
                          Context: 
                          {context}
+                         
+                         Task:
+                        Extract only what is explicitly present. Do not interpret.
                          """)
         ]
         
