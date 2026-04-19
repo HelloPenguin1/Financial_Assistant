@@ -4,6 +4,8 @@ from graph.state import WorkerState, GraphState
 from langgraph.types import Send
 from prompts.orchestrator_prompt import orchestrator_system_prompt
 from prompts.worker_prompt import worker_system_prompt
+from tools.vectorstore import get_vectorstore
+
 
 def orchestrator(state: GraphState):
     """Orchestrator that generates a plan for the report with 10-K and 10-Q sections.
@@ -31,7 +33,6 @@ def assign_workers(state: GraphState):
             "llm_call",
             {
                 "section": s,
-                 "vectorstore": state["vectorstore"]
             }
         )
         for s in state["sections"]
@@ -42,11 +43,11 @@ def assign_workers(state: GraphState):
 def llm_call(state: WorkerState):
     """Worker writes a section of the report"""
     section = state['section']
-    vectorstore = state["vectorstore"]
-    
+    vectorstore = get_vectorstore()
+
     retriever = vectorstore.as_retriever(
         search_kwargs={
-            "k": 2,  # Reduced from 5 to 2 to avoid token limits
+            "k": 5,  # Reduced from 5 to 2 to avoid token limits
             "filter": {
                 "$and": [
                     {"form": section.filing_type},

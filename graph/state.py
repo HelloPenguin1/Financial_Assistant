@@ -16,7 +16,6 @@ class GraphState(TypedDict):
     
     filing_to_fetch: Optional[list[str]]
             
-    vectorstore: VectorStore
     
     #Full Report Workflow
     sections: list[Section] # list of report sections (after orchestrator)
@@ -32,7 +31,6 @@ class GraphState(TypedDict):
 # For Data Isolation, and parallelization
 class WorkerState(TypedDict):
     section: Section
-    vectorstore: VectorStore
     completed_sections: Annotated[
         list, operator.add
     ]

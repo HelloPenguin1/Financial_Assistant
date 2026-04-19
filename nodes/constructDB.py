@@ -2,6 +2,7 @@ from tools.fetch_filings import fetchData
 from tools.conversion import filings_to_langchain_docs
 from tools.vectorstore import vectordb_store
 
+
 class Construct_DB:
     def __init__(self):
         #Intialize the fetcher
@@ -26,9 +27,9 @@ class Construct_DB:
         filings = list(filings)
     
         chunks = filings_to_langchain_docs(filings=filings, ticker=state["company"])
-        vectordb = vectordb_store(chunks)
+        vectordb_store(chunks)
         
-        return {"vectorstore": vectordb}
+        return {}
 
     
         
