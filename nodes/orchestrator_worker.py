@@ -1,37 +1,23 @@
 from config.model_gateway import planner_llm, writer_llm
 from langchain_core.messages import SystemMessage, HumanMessage
 from graph.state import WorkerState, GraphState
-from langgraph.types import Send    
+from langgraph.types import Send
+from prompts.orchestrator_prompt import orchestrator_system_prompt
 
 def orchestrator(state: GraphState):
-    """Orchestrator that generates a plan for the report"""
+    """Orchestrator that generates a plan for the report with 10-K and 10-Q sections.
+    
+    Returns section plans with filter_sections for metadata filtering in retriever.
+    Each section includes 3-4 most financially significant items to retrieve from.
+    """
+    
     report_section = planner_llm.invoke(
         [
-            SystemMessage(content="""
-        You are a financial planning agent.
-
-        Decompose the user query into exactly 3 sections, one per SEC filing type:
-
-        - 10-K → long-term fundamentals, risks, strategy
-        - 10-Q → recent financial performance and trends
-        - 8-K → material events and announcements
-
-        For each section, output:
-        - name
-        - description
-        - filing_type
-        - retrieval_query (optimized for semantic search, not a question)
-        - filters (must include form)
-        - generation_goal
-
-        Constraints:
-        - Exactly 3 sections
-        - No overlap between sections
-        - Queries must target financial signals"""),
-        HumanMessage(content=f"""Use these information for report. 
-                     User Query: {state['query']}, 
-                     Company: {state['company']}, 
-                     Time Duration: {state['start_date']} to {state['end_date']}""")
+            SystemMessage(content=orchestrator_system_prompt),
+            HumanMessage(content=f"""Create a financial analysis plan based on:
+            - User Query: {state['query']}
+            - Company: {state['company']}
+            - Time Duration: {state['start_date']} to {state['end_date']}""")
         ]
     )
     
@@ -61,7 +47,10 @@ def llm_call(state: WorkerState):
         search_kwargs={
             "k": 2,  # Reduced from 5 to 2 to avoid token limits
             "filter": {
-                "form": section.filing_type
+                "$and": [
+                    {"form": section.filing_type},
+                    {"section": {"$in": section.filter_sections}}
+                ]
             }
         }
     )
@@ -73,7 +62,7 @@ def llm_call(state: WorkerState):
             SystemMessage(content="""
         You are a financial analyst.
 
-        Write a precise analytical section using retrieved SEC filing data.
+        Write a precise analytical section of the company's financial situation using retrieved SEC filing data.
 
         Focus:
         - Extract signals, not generic summaries

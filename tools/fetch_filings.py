@@ -29,7 +29,6 @@ class fetchData:
         return {
             "10-K": self.company.get_filings(form="10-K", amendments=False).latest(),
             "10-Q": self.company.get_filings(form="10-Q", amendments=False).latest(),
-            "8-K":  self.company.get_filings(form="8-K", amendments=False).latest()
         }
         
         

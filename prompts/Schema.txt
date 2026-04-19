@@ -1,0 +1,42 @@
+
+
+
+10-K Schema
+| ├── PART I                                                                                                      │
+│ │   ├── Item 1  Business                                                                                        │
+│ │   ├── Item 1A Risk Factors                                                                                    │
+│ │   ├── Item 1B Unresolved Staff Comments                                                                       │
+│ │   ├── Item 1C Cybersecurity                                                                                   │
+│ │   ├── Item 2  Properties                                                                                      │
+│ │   ├── Item 3  Legal Proceedings                                                                               │
+│ │   └── Item 4  Mine Safety Disclosures                                                                         │
+│ ├── PART II                                                                                                     │
+│ │   ├── Item 5  Market for Registrant's Common Equity                                                           │
+│ │   ├── Item 6  Selected Financial Data                                                                         │
+│ │   ├── Item 7  Management's Discussion and Analysis (MD&A)                                                     │
+│ │   ├── Item 7A Quantitative and Qualitative Disclosures About Market Risk                                      │
+│ │   ├── Item 8  Financial Statements                                                                            │
+│ │   ├── Item 9  Controls and Procedures                                                                         │
+│ │   ├── Item 9A Controls and Procedures                                                                         │
+│ │   ├── Item 9B Other Information                                                                               │
+│ │   └── Item 9C Disclosure Regarding Foreign Jurisdictions That Prevent Inspections                             │
+│ ├── PART III                                                                                                    │
+│ │   ├── Item 10 Directors, Executive Officers, and Corporate Governance 
+
+
+
+10_Q Schema 
+
+├── PART I                                                                                                      │
+│ │   ├── Item 1   Financial Statements                                                                           │
+│ │   ├── Item 2   Management's Discussion and Analysis of Financial Condition and Results of Operations (MD&A)   │
+│ │   ├── Item 3   Quantitative and Qualitative Disclosures About Market Risk                                     │
+│ │   └── Item 4   Controls and Procedures                                                                        │
+│ └── PART II                                                                                                     │
+│     ├── Item 1   Legal Proceedings                                                                              │
+│     ├── Item 1A  Risk Factors                                                                                   │
+│     ├── Item 2   Unregistered Sales of Equity Securities and Use of Proceeds                                    │
+│     ├── Item 3   Defaults Upon Senior Securities                                                                │
+│     ├── Item 4   Mine Safety Disclosures                                                                        │
+│     ├── Item 5   Other Information                                                                              │
+│     └── Item 6   Exhibits                             
