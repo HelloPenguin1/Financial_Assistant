@@ -8,6 +8,7 @@ def vectordb_store(chunks):
     vectorstore = Chroma.from_documents(
         documents = chunks,
         embedding = embedding_function,
+        persist_directory="./db_chroma"   #Adding persistence
     )
         
     return vectorstore

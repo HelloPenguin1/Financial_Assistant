@@ -14,6 +14,8 @@ class GraphState(TypedDict):
     end_date: Optional[str] = None
     intent: str
     
+    filing_to_fetch: Optional[list[str]]
+            
     vectorstore: VectorStore
     
     #Full Report Workflow
@@ -22,6 +24,9 @@ class GraphState(TypedDict):
         list, operator.add   #all workers write to this key in parallel
     ]
     final_report: str #Final report
+    
+    
+    
     
 
 # For Data Isolation, and parallelization
