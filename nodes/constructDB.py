@@ -16,7 +16,6 @@ class Construct_DB:
             filings = self.fetcher.fetch_latest_filings(ticker=state["company"])
             filings = [f for f in filings.values() if f is not None]
             
-            
         else: #if intent is specific
             filings = self.fetcher.fetch_filings(
             ticker=state["company"],

@@ -2,9 +2,13 @@ from langchain_classic.schema import Document
 from config.model_gateway import embedding_function
 
         
+from langchain_classic.schema import Document
+
 def filings_to_langchain_docs(filings, ticker):
-    """Take chunks from filings, convert into Lanchain documents with metadata"""
-    chunks=[]
+    """Convert filings into LangChain Document objects (no overwrite, stable structure)"""
+
+    all_docs = []  # global accumulator
+
     for filing in filings:
         try:
             obj = filing.obj()
@@ -12,9 +16,9 @@ def filings_to_langchain_docs(filings, ticker):
             items = chunk_doc.list_items()
 
             for item in items:
-                chunks = chunk_doc.chunks_for_item(item)
+                item_chunks = chunk_doc.chunks_for_item(item)  # local variable
 
-                for i, c in enumerate(chunks):
+                for i, c in enumerate(item_chunks):
 
                     # robust extraction
                     if isinstance(c, str):
@@ -28,7 +32,7 @@ def filings_to_langchain_docs(filings, ticker):
                     if "TableBlock" in text:
                         continue
 
-                    chunks.append(
+                    all_docs.append(
                         Document(
                             page_content=text,
                             metadata={
@@ -45,5 +49,4 @@ def filings_to_langchain_docs(filings, ticker):
         except Exception:
             continue
 
-    return chunks
-    
+    return all_docs
