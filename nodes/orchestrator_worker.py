@@ -35,7 +35,7 @@ def orchestrator(state: GraphState):
         ]
     )
     
-    return {"sections": report_section.sections}
+    return {"sections": [s.model_dump() for s in report_section.sections]}
 
 
 def assign_workers(state: GraphState):
@@ -61,11 +61,11 @@ def llm_call(state: WorkerState):
         search_kwargs={
             "k":5,
             "filter": {
-                "form": section["filing_type"]
+                "form": section.filing_type
             }
         }
     )
-    docs = retriever.invoke(section["retrieval_query"])
+    docs = retriever.invoke(section.retrieval_query)
     context = "\n\n".join([d.page_content for d in docs])
     
     response = writer_llm.invoke(
@@ -83,8 +83,8 @@ def llm_call(state: WorkerState):
         - Output markdown"""),
             
             HumanMessage(content=f"""
-                         Section: {section["name"]} \n\n
-                         Objective: {section["generation_goal"]} \n\n
+                         Section: {section.name} \n\n
+                         Objective: {section.generation_goal} \n\n
                          Context: 
                          {context}
                          """)
