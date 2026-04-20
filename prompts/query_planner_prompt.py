@@ -16,7 +16,7 @@ query_planner_prompt = ChatPromptTemplate.from_template(
     3) Provide a brief 1 lie rational behind the intent you chose for transparency.
         
     3) The start and end year specified by the user. Leave end_date empty if not specified in query.
-
+    4) The SEC filing to fetch (if 'specific' is chosen)
     
     The following SEC filing types are useful if the user intent is 'specific'. You may use the guide to analyze the user question and 
     determine whether it is 'specific' .
@@ -54,6 +54,7 @@ query_planner_prompt = ChatPromptTemplate.from_template(
     intent: specific
     start_date: 2025
     end_date: 2025
+    filing_to_fetch: 10-Q
     rationale: Quarter-over-quarter analysis requires interim financial data reported in 10-Q filings.
     </example>
 

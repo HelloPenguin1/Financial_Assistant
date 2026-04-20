@@ -10,6 +10,7 @@ def QueryDecomposer(state):
         "start_date": output.start_date,
         "end_date":output.end_date,
         "intent": output.intent,
-        "rationale": output.rationale
+        "rationale": output.rationale,
+        "filing_to_fetch": output.filing_to_fetch
     }
     

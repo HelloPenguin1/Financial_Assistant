@@ -6,5 +6,12 @@ from tools.vectorstore import vectordb_store
 ### This agent fetches a spcific filing with specific date for a specific company a d interprets it
 
 
+def retriever(state):
+    
+    
+    
+    
+    return {"final": "test"}
+
     
         

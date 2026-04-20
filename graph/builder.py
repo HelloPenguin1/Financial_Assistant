@@ -7,17 +7,6 @@ from nodes.interpreter import retriever
 from nodes.route_decision import route_decision
 
 
-# #When intent == full_report:
-
-# fetch filings
-# build vectorstore
-# generate 3 structured sections
-# spawn 3 workers
-# each:
-# filtered retrieval (10-K / 10-Q / 8-K)
-# LLM analysis
-# aggregate
-
 # Initialize the graph
 graph = StateGraph(GraphState)
 construct_db = Construct_DB()
@@ -33,20 +22,24 @@ graph.add_node("synthesizer", synthesizer)
 #Add edges
 graph.add_edge(START, "query_decomposer")
 graph.add_edge("query_decomposer", "constructdb")
-graph.add_edge("constructdb", "router")
-graph.add_conditional_edges("router", 
+graph.add_conditional_edges("constructdb", 
                             route_decision, 
                             {
                                 'full_report':'orchestrator',
-                                'specific':'retriever'
-                            }
-)
+                                'retriever':'retriever'
+                            })
+# graph.add_conditional_edges("router", 
+                            
+# )
 
 graph.add_conditional_edges(
     "orchestrator",
     assign_workers,  #possibly optimize
     ["llm_call"]
 )
+
+#temp
+graph.add_edge("retriever", END)
 
 graph.add_edge("llm_call", "synthesizer")
 graph.add_edge("synthesizer", END)

@@ -9,6 +9,7 @@ class queryDecompose(BaseModel):
 
     intent: Literal["full_report", "specific", "comparison"]
     rationale: str
+    filing_to_fetch: Literal["10-K", "10-Q"] 
 
 
 # Structured Output for Full Audit Report
@@ -21,7 +22,7 @@ class Section(BaseModel):
     generation_goal: str = Field(description="The goal of generated content in this section")
     
     #For metadata filtering
-    
+
     filter_sections: List[str] = Field(description="Filtered sections to retrieve per SEC filing")
 
 class Sections(BaseModel):
