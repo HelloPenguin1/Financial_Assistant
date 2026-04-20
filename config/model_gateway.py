@@ -9,12 +9,6 @@ load_dotenv()
 #Api KEYS
 groq_api_key = os.getenv("GROQ_API_KEY")
 
-#Hugging Face 
-# embedding_function = HuggingFaceEmbeddings(
-#     model_name="sentence-transformers/all-MiniLM-L6-v2",
-#     model_kwargs={"device": "cpu"},
-#     encode_kwargs={"normalize_embeddings": True},
-# )
 
 from langchain_openai import OpenAIEmbeddings
 embedding_function = OpenAIEmbeddings()
@@ -29,6 +23,7 @@ planner_llm = ChatGroq(groq_api_key=groq_api_key,
 
 writer_llm = ChatGroq(groq_api_key=groq_api_key,
                       model_name="openai/gpt-oss-20b",
-                      temperature=0)
+                      temperature=0,
+                      max_tokens=1024)
 
-
+#
