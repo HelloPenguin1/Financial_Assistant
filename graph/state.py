@@ -25,7 +25,8 @@ class GraphState(TypedDict):
     final_report: str #Final report
     
     
-    
+    #specific filing workflow
+    retrieved_docs = []
     
 
 # For Data Isolation, and parallelization

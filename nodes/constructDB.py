@@ -12,7 +12,6 @@ class Construct_DB:
         """This node fetches all 3 SEC filing types for each, converts to Langchain docs, ingests into vectordb
         
         """
-    
         if state["intent"]=='full_report':
             filings = self.fetcher.fetch_latest_filings(ticker=state["company"])
             filings = [f for f in filings.values() if f is not None]

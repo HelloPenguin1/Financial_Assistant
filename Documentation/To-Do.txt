@@ -1,0 +1,33 @@
+
+
+To DO:
+----------------------------------
+1- Design Streamlit for Frontend
+
+2- Create additional feature (search specific SEC filing with specific date)
+- if they require specific filing, build constructdb from those, pass the query (maybe make it better) and retrieve data from those Filings into synthesizer
+
+
+
+3- If possible add ability to retrieve bank statements, cash flow, revenue etc (possibly bind to an LLM?)
+
+
+
+
+
+
+4- // Improvement
+Have orchestrator 3–5 sections INSTEAD OF 2 FIXED ONES
+Each section must:
+- Focus on ONE financial dimension
+- Use a SINGLE filing type
+- Have tightly scoped filter_sections
++
+- Have target section schema, and not let LLM invent sections
+
+- Look into retrieval queries/possibly optimize those sections with hybrid
+
+5- Eval
+Probaby not gonna get to it but learn up how we can evaluate
+
+
