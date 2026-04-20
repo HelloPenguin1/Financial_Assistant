@@ -11,6 +11,6 @@ def QueryDecomposer(state):
         "end_date":output.end_date,
         "intent": output.intent,
         "rationale": output.rationale,
-        "filing_to_fetch": output.filing_to_fetch
+        "filing_to_fetch": getattr(output, "filing_to_fetch", None)
     }
     

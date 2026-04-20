@@ -9,7 +9,7 @@ class queryDecompose(BaseModel):
 
     intent: Literal["full_report", "specific", "comparison"]
     rationale: str
-    filing_to_fetch: Literal["10-K", "10-Q"] 
+    filing_to_fetch: Optional[Literal["10-K", "10-Q"]] = None
 
 
 # Structured Output for Full Audit Report

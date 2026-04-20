@@ -25,7 +25,7 @@ graph.add_edge("query_decomposer", "constructdb")
 graph.add_conditional_edges("constructdb", 
                             route_decision, 
                             {
-                                'full_report':'orchestrator',
+                                'orchestrator':'orchestrator',
                                 'retriever':'retriever'
                             })
 # graph.add_conditional_edges("router", 
