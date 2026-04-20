@@ -11,9 +11,7 @@ def retriever(state):
     
     vectorstore = get_vectorstore()
     retriever = vectorstore.as_retriever(
-    search_type="similarity_score_threshold",
     search_kwargs={
-        "score_threshold": 0.25,
         "k": 5,
         "filter": {"form": filing_to_fetch}
     })
@@ -25,7 +23,8 @@ def retriever(state):
 ## Answer generation
 def llm_response(state):
     query = state['query']
-    retrieved_docs = state['retrieved_docs']
+    retrieved_docs = state.get("retrieved_docs")
+    print("DOC COUNT:", len(retrieved_docs))
     filing_used = state["filing_to_fetch"]
     company = state["company"]
     context = "\n\n".join([d.page_content for d in retrieved_docs])

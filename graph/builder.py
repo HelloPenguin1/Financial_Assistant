@@ -3,7 +3,7 @@ from .state import GraphState
 from nodes.query_decomposer import QueryDecomposer
 from nodes.constructDB import Construct_DB
 from nodes.orchestrator_worker import orchestrator, assign_workers, llm_call, synthesizer
-from nodes.interpreter import retriever
+from nodes.interpreter import retriever, llm_response
 from nodes.route_decision import route_decision
 
 
@@ -16,6 +16,7 @@ graph.add_node("query_decomposer",QueryDecomposer)
 graph.add_node("constructdb", construct_db.build_vectordb)
 graph.add_node("orchestrator", orchestrator)
 graph.add_node("retriever", retriever)  #To be fixed to corret name
+graph.add_node("llm_response", llm_response)
 graph.add_node("llm_call", llm_call)
 graph.add_node("synthesizer", synthesizer)
 
@@ -28,9 +29,6 @@ graph.add_conditional_edges("constructdb",
                                 'orchestrator':'orchestrator',
                                 'retriever':'retriever'
                             })
-# graph.add_conditional_edges("router", 
-                            
-# )
 
 graph.add_conditional_edges(
     "orchestrator",
@@ -38,11 +36,15 @@ graph.add_conditional_edges(
     ["llm_call"]
 )
 
+graph.add_edge("retriever", "llm_response")
+graph.add_edge("llm_response", END)
+
 #temp
-graph.add_edge("retriever", END)
 
 graph.add_edge("llm_call", "synthesizer")
 graph.add_edge("synthesizer", END)
+
+
 
 # Compile
 workflow = graph.compile()

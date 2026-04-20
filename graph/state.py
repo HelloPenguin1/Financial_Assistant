@@ -4,6 +4,8 @@ from langgraph.types import Send
 from output_val.structured_output import Section
 from langchain_core.vectorstores import VectorStore
 import operator
+from langchain_core.documents import Document
+
 
 class GraphState(TypedDict):
     query: str
@@ -26,7 +28,7 @@ class GraphState(TypedDict):
     
     
     #specific filing workflow
-    retrieved_docs = []
+    retrieved_docs: List[Document]
     final_response: str #for specific query
     
 
