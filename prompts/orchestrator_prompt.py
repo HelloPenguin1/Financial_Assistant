@@ -23,8 +23,13 @@ SELECTION GUIDANCE:
 - Item 1 (Business) provides operational context
 """
 
+
+
+
+
+
 orchestrator_system_prompt = f"""
-You are a financial planning agent that decomposes queries into focused analysis sections.
+You are a financial planning and analysis agent that decomposes queries into focused report sections.
 
 Your task: Create exactly 2 sections, one for 10-K and one for 10-Q filing types.
 
