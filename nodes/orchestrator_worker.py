@@ -76,6 +76,7 @@ def llm_call(state: WorkerState):
         
     )
     # Write the updated section to completed sections
+    #add the context to state under diff name than retrieved docs
     return {"completed_sections": [response.content]}  #save to state
     
     
