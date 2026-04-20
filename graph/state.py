@@ -29,7 +29,7 @@ class GraphState(TypedDict):
     
     #specific filing workflow
     retrieved_docs: List[Document]
-    final_response: str #for specific query
+    final_response: str #for specific query 
     
 
 # For Data Isolation, and parallelization
