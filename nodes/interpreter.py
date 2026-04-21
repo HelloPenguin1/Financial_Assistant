@@ -60,4 +60,4 @@ def llm_response(state):
             """)
         ]
     )
-    return {"final_response": final_response}
+    return {"final_response": final_response.content}

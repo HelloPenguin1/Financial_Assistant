@@ -15,4 +15,7 @@ def vectordb_store(chunks):
 def get_vectorstore():
     return _current_vectorstore
 
-
+def clear_vectorstore():
+    global _current_vectorstore
+    _current_vectorstore = None
+    return "Vectorstore cleared successfully."

@@ -1,27 +1,16 @@
-import streamlit as st
 import sys
 import os
 
-import time
-
-    
-
-# Ensure root path access
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
-
-
+# Ensure root path is always first in sys.path before any project imports
 ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 if ROOT_DIR not in sys.path:
-    
     sys.path.insert(0, ROOT_DIR)
-    
-    
-try:
-    from graph.builder import workflow
-    from tools.vectorstore import clear_vectorstore
-except Exception as e:
-    import streamlit as st
-    st.error(f"Import failed: {e}")
+
+import streamlit as st
+import time
+
+from graph.builder import workflow
+from tools.vectorstore import clear_vectorstore
 
 
 # Page Configuration
