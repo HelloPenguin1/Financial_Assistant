@@ -4,7 +4,7 @@ from typing import Literal, List, Optional
 class queryDecompose(BaseModel):
     """Structured output for Query Decomposer Layer"""
     company: str
-    start_date: str
+    start_date: Optional[str] = None
     end_date: Optional[str] = None
 
     intent: Literal["full_report", "specific", "comparison"]

@@ -14,7 +14,7 @@ from langchain_openai import OpenAIEmbeddings
 embedding_function = OpenAIEmbeddings()
 
 query_llm = ChatGroq(groq_api_key=groq_api_key,
-                     model_name="llama-3.1-8b-instant",
+                     model_name="llama-3.3-70b-versatile",
                      temperature=0).with_structured_output(queryDecompose)
 
 planner_llm = ChatGroq(groq_api_key=groq_api_key,

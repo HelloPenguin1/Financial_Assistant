@@ -39,8 +39,9 @@ graph.add_conditional_edges(
 graph.add_edge("retriever", "llm_response")
 graph.add_edge("llm_response", END)
 
-#temp
-
+# After all parallel llm_call workers complete, their results are reduced
+# into GraphState['completed_sections'] via the operator.add reducer.
+# The synthesizer then runs once, collecting all completed sections.
 graph.add_edge("llm_call", "synthesizer")
 graph.add_edge("synthesizer", END)
 

@@ -1,16 +1,28 @@
 import streamlit as st
 import sys
 import os
+
 import time
+
+    
 
 # Ensure root path access
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+
+ROOT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if ROOT_DIR not in sys.path:
+    
+    sys.path.insert(0, ROOT_DIR)
+    
+    
 try:
     from graph.builder import workflow
     from tools.vectorstore import clear_vectorstore
-except ImportError:
-    st.error("Could not import required modules. Please check your path configuration.")
+except Exception as e:
+    import streamlit as st
+    st.error(f"Import failed: {e}")
+
 
 # Page Configuration
 st.set_page_config(

@@ -33,6 +33,7 @@ def assign_workers(state: GraphState):
             "llm_call",
             {
                 "section": s,
+                "completed_sections": [],  # Initialize reducer so fan-back into GraphState works
             }
         )
         for s in state["sections"]
@@ -82,8 +83,11 @@ def llm_call(state: WorkerState):
     
 def synthesizer(state: GraphState):
     completed_sections = state["completed_sections"]
-    header = f"# Financial Analysis Report: {state['company']}\n*Period: {state['start_date']} – {state.get('end_date', 'Present')}*\n\n"
-    body = "\n\n".join(completed_sections)
-    return {"final_report": header + body}
+
+    return {
+        "final_report": "\n\n---\n\n".join(completed_sections)
+    }
+    
+
     
     

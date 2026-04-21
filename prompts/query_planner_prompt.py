@@ -90,24 +90,39 @@ FILING GUIDE (for 'specific' only):
 - 8-K: material events, earnings releases, M&A, leadership changes
 
 EXAMPLES:
-Query: "Give me a financial overview of Apple"
-→ intent: full_report | company: AAPL | start: null | end: null
-rationale: No specific topic or date range — latest filings suffice.
+     Refer to the examples below:
+        
+    <example>
+    User Query: Analyze Apple’s financial performance from 2022 to 2025.
+    Your Output:
+    company: AAPL
+    intent: full_report
+    start_date: 2022
+    end_date: 2025
+    rationale: The query is broad and non-specific, requiring a comprehensive financial overview across multiple years.
+    </example>
 
-Query: "How has Tesla's revenue changed quarter-over-quarter in 2025?"
-→ intent: specific | company: TSLA | filing: 10-Q | start: 2025 | end: 2025
-rationale: Specific metric (revenue) and time period requires targeted 10-Q retrieval.
+    <example>
+    User Query: How has Tesla’s revenue changed quarter-over-quarter in 2025?
+    Your Output:
+    company: TSLA
+    intent: specific
+    start_date: 2025
+    end_date: 2025
+    filing_to_fetch: 10-Q
+    rationale: Quarter-over-quarter analysis requires interim financial data reported in 10-Q filings.
+    </example>
 
-Query: "Analyze Apple's financial performance from 2022 to 2025"
-→ intent: specific | company: AAPL | filing: 10-K | start: 2022 | end: 2025
-rationale: Explicit date range disqualifies full_report — needs targeted retrieval.
-
-Query: "What are Apple's key risk factors?"
-→ intent: specific | company: AAPL | filing: 10-K | start: null | end: null
-rationale: Specific topic (risk factors) maps directly to 10-K Item 1A.
-
-Query: "Compare Apple and Microsoft's performance 2023–2025"
-→ intent: comparison | companies: [AAPL, MSFT] | start: 2023 | end: 2025
+    <example>
+    User Query: Compare Apple and Microsoft’s financial performance between 2023 and 2025.
+    Your Output:
+    company: [AAPL, MSFT]
+    intent: comparison
+    start_date: 2023
+    end_date: 2025
+    rationale: Comparative financial analysis across companies requires standardized annual and quarterly reports.
+    </example>
+    
 
 User Question: {question}
 """)

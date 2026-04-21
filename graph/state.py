@@ -12,7 +12,7 @@ class GraphState(TypedDict):
     
     #Query Decomposer Stage
     company: str
-    start_date: str
+    start_date: Optional[str]
     end_date: Optional[str] = None
     intent: str
     
